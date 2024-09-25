@@ -1,15 +1,17 @@
 //NzRhrGbeN89Ff1WF **MongoDB
 const express = require('express')
-const mongoose = require('mongoose')
+const db = require('mongoose')
 const cookieParser = require('cookie-parser')
-const cors = require('cors')
+const cors = require('cors');
+const authRouter = require('./routes/auth/auth-routes');
+
 
 
 //create DB
 //creata Separate file
 
 
-mongoose.connect(
+db.connect(
     "mongodb+srv://thekay1112:NzRhrGbeN89Ff1WF@cluster0.jgtd3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     )
     .then(()=>console.log('MongoDB connected'))
@@ -35,6 +37,12 @@ app.use(
 )
 
 app.use(cookieParser());
-app.use(express.json())
+app.use(express.json());
+
+app.use('/api/auth', authRouter)
 
 app.listen(PORT, ()=>console.log(`Service is running on port ${PORT}`));
+
+
+
+
